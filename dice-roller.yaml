@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: dice-roller
-  replicas: 10
+  replicas: 1
   template:
     metadata:
       labels:
@@ -88,7 +88,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.14.2
+          image: nginx
           ports:
             - containerPort: 80
           resources:
@@ -172,7 +172,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.14.2
+          image: nginx
           resources:
             requests:
               memory: '64Mi'
@@ -221,22 +221,6 @@ spec:
             - containerPort: 80
 
 ---
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: dice-roller
-  labels:
-    'backstage.io/kubernetes-id': dice-roller
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: dice-roller
-  minReplicas: 10
-  maxReplicas: 15
-  targetCPUUtilizationPercentage: 50
-
----
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -264,25 +248,6 @@ spec:
                 - -c
                 - date; echo Rolling a die!
           restartPolicy: OnFailure
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: dice-roller
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
-  labels:
-    'backstage.io/kubernetes-id': dice-roller
-spec:
-  rules:
-    - host: nginx
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: dice-roller
-              servicePort: 80
 
 ---
 apiVersion: v1
