@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backstage-config
+  namespace: backstage
+data:
+  K8S_URL: "https://kubernetes.default.svc"
+  ARGOCD_SERVER_URL_PROXY: http://argocd-server.default.svc.cluster.local:80/api/v1/
+  PROMETHEUS_URL_PROXY: http://prometheus-server.prometheus.svc.cluster.local:80/api/v1/
+  ARGOCD_SERVER_URL: http://argocd-server.default.svc.cluster.local:80/
+  POD_NAMESPACE: default
