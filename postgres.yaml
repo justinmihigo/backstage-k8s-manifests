@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:13.2-alpine
-          imagePullPolicy: 'IfNotPresent'
+          image: pgvector/pgvector:pg13
+          imagePullPolicy: 'Always'
           ports:
             - containerPort: 5432
           envFrom:
@@ -34,7 +34,7 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgresdb
-              subPath: data
+              subPath: data          
       volumes:
         - name: postgresdb
           persistentVolumeClaim:

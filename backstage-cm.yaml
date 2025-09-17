@@ -4,8 +4,15 @@ metadata:
   name: backstage-config
   namespace: backstage
 data:
-  K8S_URL: "https://kubernetes.default.svc"
+  K8S_URL: "https://kubernetes.default.svc" 
   ARGOCD_SERVER_URL_PROXY: http://argocd-server.default.svc.cluster.local:80/api/v1/
   PROMETHEUS_URL_PROXY: http://prometheus-server.prometheus.svc.cluster.local:80/api/v1/
   ARGOCD_SERVER_URL: http://argocd-server.default.svc.cluster.local:80/
   POD_NAMESPACE: default
+  GRAFANA_URL: grafana.grafana.svc.cluster.local:80
+  JIRA_URL: https://mihigojustin.atlassian.net/
+  K8S_SERVER_URL: "https://kubernetes.default.svc"
+  NEW_RELIC_URL: https://api.eu.newrelic.com
+  NEW_RELIC_URL_APM: https://api.eu.newrelic.com/v2/
+  OPENSEARCH_URL: http://192.168.136.132:9200
+  AWX_URL: http://awx-service.awx.svc.cluster.local:80
